@@ -1,0 +1,41 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../expandjs/expandjs.html">
+<link rel="import" href="../tux-d3/tux-d3.html">
+<link rel="import" href="../xp-pubsub-behavior/xp-pubsub-behavior.html">
+<script>
+    TuxD3.DataSourceBehaviorImpl =  {
+        properties: {
+            isDataSource: {
+                type: Boolean,
+                value: true,
+                readOnly: true,
+                notify: true,
+                reflectToAttribute: true
+            },
+
+            data: {
+                type: Array,
+                value: function() { return []; },
+                notify: true
+            }
+        },
+        observers: [ '_refresh(data, data.splices)' ],
+
+        _refresh: function(data, delta) {
+            var self = this;
+            self.notify('d3-data-changed', { firer: self, data: self.data, delta: delta });
+        },
+        
+        attached: function() {
+            var self = this;
+            self.async(function() {
+                self._refresh();
+            });
+        }
+    };
+
+    TuxD3.DataSourceBehavior = [
+        Polymer.XPPubSubBehavior,
+        TuxD3.DataSourceBehaviorImpl
+    ];
+</script>
