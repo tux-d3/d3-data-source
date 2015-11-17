@@ -1,6 +1,37 @@
 <!--
 @license
-Copyright (c) 2015 Tux Authors
+Copyright (C) 2015 TuxD3 Authors
+This code may only be used under the BSD style license found at https://tux-d3.github.io/LICENSE.txt
+The complete set of authors may be found at https://tux-d3.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://tux-d3.github.io/CONTRIBUTORS.txt
+-->
+
+<!--
+An element used to create a data source.
+This is used in conjunction with `d3-data-consumer-behavior` and
+`d3-data-broker-behavior`
+
+For example,
+
+```html
+    <d3-chart>
+        <d3-data-source data='[[data]]'></d3-data-source>
+        <d3-directed-graph></d3-directed-graph>
+    </d3-chart>
+```
+
+Here `d3-directed-graph` would adapt the `d3-data-consumer-behavior`
+and the `d3-chart` would adapt the `d3-data-broker-behavior` which will
+bind the data consumer with the data source.
+
+@element d3-data-source
+@description an element that becomes a data bridge
+@keywords d3js, tux, tux-d3, webcomponents
+@dependency polymer Polymer/polymer#^1.1.0
+@dependency tux-d3  tux-d3/tux-d3#^0.1.0
+@dependency d3-data-broker-behavior tux-d3/d3-data-broker-behavior#^0.1.0
+@dependency d3-data-consumer-behavior tux-d3/d3-data-consumer-behavior#^0.1.0
+
 -->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../tux-d3/tux-d3.html">
@@ -13,6 +44,16 @@ Copyright (c) 2015 Tux Authors
     // initialize anything common to all instances here
     // like static variables.
     Polymer({
+        /**
+         * The data that this source provides to its consumers
+         * You can manipulate this directly to affect all registered consumers
+         *
+         * @attribute data
+         * @type Object
+         * @notifies
+         * @default {}
+         */
+
       is: "d3-data-source",
       // implement the core behavior for this element in
       // d3-data-source-behavior.html

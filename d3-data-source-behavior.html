@@ -14,18 +14,18 @@
             },
 
             data: {
-                type: Array,
-                value: function() { return []; },
+                type: Object,
+                value: function() { return {}; },
                 notify: true
-            }
+            },
         },
-        observers: [ '_refresh(data, data.splices)' ],
+        observers: [ '_refresh(data, data.*)' ],
 
         _refresh: function(data, delta) {
             var self = this;
             self.notify('d3-data-changed', { firer: self, data: self.data, delta: delta });
         },
-        
+
         attached: function() {
             var self = this;
             self.async(function() {
